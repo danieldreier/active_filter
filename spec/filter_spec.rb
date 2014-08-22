@@ -6,8 +6,10 @@ describe ActiveFilter::Filter do
   let(:filter) { ActiveFilter::Filter.new(all: { foo: 'bar' }) }
 
   describe '::initialize' do 
-    it 'stores conditions in an instance variable' do 
-      expect(filter.instance_variables).to include(:@conditions) 
+    context 'with valid parameters' do 
+      it 'stores conditions in an instance variable' do 
+        expect(filter.instance_variables).to include(:@conditions) 
+      end
     end
   end
 
