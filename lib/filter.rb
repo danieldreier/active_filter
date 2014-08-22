@@ -7,6 +7,10 @@ module ActiveFilter
   class Filter
     attr_reader :conditions
     
+    # The conditions used in the initialize method will probably end up being
+    # removed; instead, subclasses will be initialized with conditions through the larger
+    # ActiveFilter module.
+    
     def initialize(conditions)
       @conditions = conditions
     end
