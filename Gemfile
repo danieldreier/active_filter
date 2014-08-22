@@ -10,4 +10,5 @@ group :test do
   gem 'coveralls', '~> 0.7.1', require: false
   gem 'factory_girl', '~> 4.4'
   gem 'activerecord', '~> 4.1.5'
+  gem 'sqlite3', '~> 1.3.9', platform: :ruby
 end
