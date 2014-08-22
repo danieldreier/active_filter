@@ -11,6 +11,12 @@ describe ActiveFilter::Filter do
         expect(filter.instance_variables).to include(:@conditions) 
       end
     end
+
+    context 'with invalid conditions' do 
+      it 'raises an argument error' do 
+        expect{ ActiveFilter::Filter.new({foo: 'bar'})}.to raise_error
+      end
+    end
   end
 
   describe 'instance methods' do 

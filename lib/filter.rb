@@ -1,3 +1,5 @@
+require 'active_support/core_ext/object/blank.rb'
+
 module ActiveFilter
 
   # ActiveFilter::Filter is a base class used to generate filters for ActiveRecord
@@ -5,6 +7,8 @@ module ActiveFilter
   # is the camel-cased name of an ActiveRecord::Base subclass.
 
   class Filter
+
+    ALLOWED_KEYS = [ :all, :any, :none ]
 
     # ++#conditions++ returns the value of the ++@conditions++ instance variable, which stores
     # the conditions passed to the Filter class on ++::initialize++
@@ -25,7 +29,16 @@ module ActiveFilter
     # The filter would then return all incomplete tasks whose status was either 'urgent' or 'high'.
 
     def initialize(conditions)
-      @conditions = conditions
+      raise ArgumentError unless (@conditions = sanitize!(conditions)).present?
     end
+
+    protected 
+
+      # The ++#sanitize!++ method ensures that conditions hash passed into the ++#initialize++ method contain
+      # only keys allowed by the ++ALLOWED_KEYS++ constant. It returns the conditions if they are 
+
+      def sanitize!(conditions)
+        conditions.reject {|key, value| !ALLOWED_KEYS.include?(key) }
+      end
   end
 end
