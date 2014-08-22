@@ -11,7 +11,7 @@ module ActiveFilter
     # removed; instead, subclasses will be initialized with conditions through the larger
     # ActiveFilter module.
     #
-    # Conditions take the form of a hash. Hash keys may include ++:all++, ++:any++, and ++:none++,
+    # The ++conditions++ parameter is a hash. Keys may include ++:all++, ++:any++, and ++:none++,
     # each of which points to a hash of attributes for the ActiveRecord model being filtered.
     # The ++:all++, ++:any++, and ++:none++ keys function as logical AND, OR, and NOT operators, and may be
     # nested. For example, given a model ++Task++ with attributes ++:priority++, ++status++, and 
