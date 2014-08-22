@@ -11,4 +11,5 @@ group :test do
   gem 'factory_girl', '~> 4.4'
   gem 'activerecord', '~> 4.1.5'
   gem 'sqlite3', '~> 1.3.9', platform: :ruby
+  gem 'database_cleaner', '~> 1.3.0'
 end
