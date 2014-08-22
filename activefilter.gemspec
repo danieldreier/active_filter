@@ -1,4 +1,4 @@
-Gem::Specification do |gem|
+Gem::Specification.new do |gem|
   gem.name = "activefilter"
   gem.version = "0.0.0"
 
