@@ -1,4 +1,6 @@
-active_filter
-=============
+ActiveFilter
+============
 
-A filtering utility to be used with ActiveRecord
+ActiveFilter is a utility for filtering ActiveRecord resources. It is being spun off of 
+the [Canto](https://github.com/danascheider/canto) project into a standalone gem providing
+expanded search and filter functionality.
