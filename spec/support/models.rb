@@ -1,7 +1,14 @@
 require 'active_record'
 
-class Task < ActiveRecord::Base; end
+class User < ActiveRecord::Base
+  has_one :list
+end
 
-class User < ActiveRecord::Base; end
+class List < ActiveRecord::Base 
+  belongs_to :user
+  has_many :tasks
+end
 
-class Widget < ActiveRecord::Base; end
+class Task < ActiveRecord::Base
+  belongs_to :list
+end
