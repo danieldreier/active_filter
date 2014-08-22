@@ -6,6 +6,8 @@ module ActiveFilter
 
   class Filter
 
+    ALLOWED_KEYS = [ :all, :any, :none ]
+
     # ++#conditions++ returns the value of the ++@conditions++ instance variable, which stores
     # the conditions passed to the Filter class on ++::initialize++
 
@@ -25,7 +27,12 @@ module ActiveFilter
     # The filter would then return all incomplete tasks whose status was either 'urgent' or 'high'.
 
     def initialize(conditions)
-      @conditions = conditions
+      raise ArgumentError unless @conditions = validate(conditions)
     end
+
+    protected 
+      def validate(conditions)
+        conditions.is_a?(Hash) && conditions.keys & ALLOWED_KEYS == conditions.keys ? conditions : nil
+      end
   end
 end
