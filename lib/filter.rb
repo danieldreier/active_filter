@@ -5,6 +5,10 @@ module ActiveFilter
   # is the camel-cased name of an ActiveRecord::Base subclass.
 
   class Filter
+
+    # ++#conditions++ returns the value of the ++@conditions++ instance variable, which stores
+    # the conditions passed to the Filter class on ++::initialize++
+
     attr_reader :conditions
     
     # The conditions used in the initialize method will probably end up being
