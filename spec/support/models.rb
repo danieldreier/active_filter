@@ -13,8 +13,14 @@ class List < ActiveRecord::Base
   has_many :tasks
 end
 
-# Task attributes are :title, :status, :list_id, :deadline, :created_at, :updated_at
+# Task attributes are :title, :status, :list_id, :deadline, :created_at, :updated_at, :user_id
 
 class Task < ActiveRecord::Base
   belongs_to :list
+  before_create :set_user_id
+
+  private 
+    def set_user_id
+      self.user_id = self.list.user.id 
+    end
 end
