@@ -34,9 +34,8 @@ module ActiveFilter
 
     protected 
 
-      # The ++#sanitize!++ method, usually called from ++#initialize++, validates the keys of the 
-      # hash given as a parameter, ensuring they contain only keys allowed by the ALLOWED_KEYS 
-      # constant. It removes invalid keys and returns the remaining conditions hash.
+    # Sanitizes a given +conditions+ hash and checks its keys. 
+    # Returns the sanitized Hash, containing only allowed keys.
 
       def sanitize!(conditions)
         conditions.reject {|key, value| !ALLOWED_KEYS.include?(key) }
