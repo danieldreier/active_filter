@@ -19,9 +19,13 @@ describe ActiveFilter::Filter do
     end
 
     context 'with some invalid keys' do 
+      let(:filter) { ActiveFilter::Filter.new(foo: 'bar', all: { bar: 'baz' })}
+
       it 'doesn\'t raise an error' do 
-        expect{ActiveFilter::Filter.new({foo: 'bar', all: { priority: 'high' }})}.not_to raise_error
+        expect{ filter }.not_to raise_error
       end
+
+      it ''
     end
   end
 
