@@ -17,6 +17,12 @@ describe ActiveFilter::Filter do
         expect{ ActiveFilter::Filter.new({foo: 'bar'})}.to raise_error
       end
     end
+
+    context 'with some invalid keys' do 
+      it 'doesn\'t raise an error' do 
+        expect{ActiveFilter::Filter.new({foo: 'bar', all: { priority: 'high' }})}.not_to raise_error
+      end
+    end
   end
 
   describe 'instance methods' do 
@@ -24,6 +30,10 @@ describe ActiveFilter::Filter do
       it 'returns conditions with which it was initialized' do 
         expect(filter.conditions).to eql({all: {foo: 'bar'}})
       end
+    end
+
+    describe 'filter' do 
+      #
     end
   end
 end
