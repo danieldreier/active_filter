@@ -29,6 +29,22 @@ describe ActiveFilter::Filter do
         expect(filter.conditions).to eql({all: {bar: 'baz'}})
       end
     end
+
+    context 'with scope given' do 
+      let(:filter) { ActiveFilter::Filter.new(scope: { user_id: 12 }, any: { foo: 'bar', bar: 'baz' }) }
+
+      it 'creates a new filter' do 
+        expect(filter).to be_an(ActiveFilter::Filter)
+      end
+
+      it 'stores the conditions and scope in instance variables' do 
+        [:@conditions, :@scope].each {|var| expect(filter.instance_variables).to include(var) }
+      end
+
+      it 'deletes the :scope key from @conditions' do 
+        expect(filter.conditions).to eql({any: { foo: 'bar', bar: 'baz' }})
+      end
+    end
   end
 
   describe 'instance methods' do 

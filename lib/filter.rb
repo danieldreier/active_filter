@@ -11,9 +11,12 @@ module ActiveFilter
     ALLOWED_KEYS = [ :all, :any, :none ]
 
     # ++#conditions++ returns the value of the ++@conditions++ instance variable, which stores
-    # the conditions passed to the Filter class on ++::initialize++
+    # the conditions passed to the Filter class on ++::initialize++.
 
-    attr_reader :conditions
+    # ++#scope++ returns the value of ++@scope++, which is taken from the ++conditions++ hash on
+    # ++::initialize++.
+
+    attr_reader :conditions, :scope
     
     # The conditions used in the initialize method will probably end up being
     # removed; instead, subclasses will be initialized with conditions through the larger
@@ -26,15 +29,21 @@ module ActiveFilter
     # ++category++, a ++TaskFilter++ could be initialized with the following conditions:
     #   ++{all: { priority: ['urgent', 'high'], status: 'incomplete' }}++
     #
+    # The optional ++scope++ key stands for the initial scope of the ActiveRecord model being filtered.
+    # For a model called ++Comment++, the scope could be:
+    #   ++{user_id: 2}++
+    # Then the filter would be applied only to comments belonging to user 2.
+    #
     # The filter would then return all incomplete tasks whose status was either 'urgent' or 'high'.
 
     def initialize(conditions)
+      @scope = conditions.delete(:scope)
       raise ArgumentError unless (@conditions = sanitize!(conditions)).present?
     end
 
     protected 
 
-    # Sanitizes a given +conditions+ hash and checks its keys. 
+    # Sanitizes a given ++conditions++ hash and checks its keys. 
     # Returns the sanitized Hash, containing only allowed keys.
 
       def sanitize!(conditions)
