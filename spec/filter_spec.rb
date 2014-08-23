@@ -25,7 +25,9 @@ describe ActiveFilter::Filter do
         expect{ filter }.not_to raise_error
       end
 
-      it ''
+      it 'only stores valid conditions' do 
+        expect(filter.conditions).to eql({all: {bar: 'baz'}})
+      end
     end
   end
 
