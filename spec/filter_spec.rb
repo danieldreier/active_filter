@@ -54,8 +54,5 @@ describe ActiveFilter::Filter do
       end
     end
 
-    describe 'filter' do 
-      #
-    end
   end
 end
