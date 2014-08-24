@@ -12,7 +12,7 @@ load 'active_record/railties/databases.rake'
 
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
-  database: 'db/test.sqlite3',
+  database: File.expand_path('../db/test.sqlite3', __FILE__),
   pool: 5,
   timeout: 5000
   )

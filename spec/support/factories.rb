@@ -35,7 +35,6 @@ FactoryGirl.define do
   end
 
   factory :task do 
-    @task_statuses = ['new', 'in progress', 'blocking', 'complete']
     association :list
     sequence(:title) {|n| "Task #{n}" }
     sequence(:status) {|n| TaskStatus.random_status}
