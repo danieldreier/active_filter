@@ -32,6 +32,10 @@ end
 # ActiveRecord::Tasks::DatabaseTasks.database_configuration = YAML.load_file(db_yml)
 # ActiveRecord::Migrator.migrations_path = ActiveRecord::Tasks::DatabaseTasks.migrations_paths
 
+Rake::Task["db:load_config"].clear
+Rake::Task.define_task("db:environment")
+Rake::Task["db:test:deprecated"].clear if Rake::Task.task_defined?("db:test:deprecated")
+
 RSpec::Core::RakeTask.new
 Rake::Task['db:test:prepare'].invoke
 
