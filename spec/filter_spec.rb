@@ -54,8 +54,15 @@ describe ActiveFilter::Filter do
       end
     end
 
-    describe 'filter' do 
-      #
+    describe '#get_scoped' do 
+      before(:each) do 
+        @users = FactoryGirl.create_list(:user_with_list, 3)
+        @scope = { user_id: @users.first.id }
+      end
+
+      it 'returns the scoped subset' do 
+        #
+      end
     end
   end
 end

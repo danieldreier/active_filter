@@ -1,8 +1,12 @@
 require 'factory_girl'
 
-FactoryGirl.define do 
-  @task_statuses = ['new', 'in progress', 'blocking', 'complete']
+module TaskStatus
+  def self.random_status
+    ['new', 'in progress', 'blocking', 'complete'].shuffle.first
+  end
+end
 
+FactoryGirl.define do 
   factory :user do 
     sequence(:username) {|n| "user-#{n}" }
     sequence(:birthdate) {|n| Time.utc(rand(1950..1995),rand(1..12),n) }
@@ -31,9 +35,10 @@ FactoryGirl.define do
   end
 
   factory :task do 
+    @task_statuses = ['new', 'in progress', 'blocking', 'complete']
     association :list
     sequence(:title) {|n| "Task #{n}" }
-    sequence(:status) {|n| @task_statuses[rand(1..4)-1]}
+    sequence(:status) {|n| TaskStatus.random_status}
     sequence(:deadline) {|n| Time.utc(2014,10,rand(1..31)) }
   end
 end
