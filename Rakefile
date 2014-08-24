@@ -8,11 +8,16 @@ require 'fileutils'
 db_yml = File.expand_path('config/database.yml')
 
 include ActiveRecord::Tasks::DatabaseTasks
-ActiveRecord::Tasks::DatabaseTasks.db_dir = File.expand_path('../db', __FILE__)
-ActiveRecord::Tasks::DatabaseTasks.database_configuration = YAML.load_file(db_yml)
-ActiveRecord::Tasks::DatabaseTasks.migrations_paths = File.expand_path('../db/migrate', __FILE__)
-ActiveRecord::Tasks::DatabaseTasks.root = File.expand_path('../spec/support',__FILE__)
-ActiveRecord::Tasks::DatabaseTasks.env = 'test'
+
+ActiveRecord::Tasks::DatabaseTasks.tap do |config|
+  config.env                    = 'test'
+  config.db_dir                 = File.expand_path('../db', __FILE__)
+  config.migrations_paths       = File.expand_path('../db/migrate', __FILE__)
+  config.database_configuration = ActiveRecord::Base.configurations
+  config.root                   = File.expand_path('../spec/support', __FILE__)
+end
+
+#ActiveRecord::Tasks::DatabaseTasks.database_configuration = YAML.load_file(db_yml)
 ActiveRecord::Migrator.migrations_path = ActiveRecord::Tasks::DatabaseTasks.migrations_paths
 
 Dir.glob('tasks/*.rake').each {|r| load r}
@@ -26,5 +31,6 @@ ActiveRecord::Base.establish_connection(
   )
 
 RSpec::Core::RakeTask.new
+Rake::Task['db:test:prepare'].invoke
 
 task :default => [:spec]
