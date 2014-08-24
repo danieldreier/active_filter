@@ -22,6 +22,7 @@ ActiveRecord::Tasks::DatabaseTasks.tap do |config|
   config.db_dir                 = File.expand_path('../db', __FILE__)
   config.migrations_paths       = File.expand_path('../db/migrate', __FILE__)
   config.database_configuration = ActiveRecord::Base.configurations
+  config.fixtures_path          = File.expand_path('../spec/support/factories', __FILE__)
   config.root                   = File.expand_path('../spec/support', __FILE__)
 end
 
